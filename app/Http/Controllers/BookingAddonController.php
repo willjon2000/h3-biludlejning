@@ -11,8 +11,7 @@ class BookingAddonController extends Controller
 {
     public function __construct()
     {
-        //adds policy's to Controller
-        $this->authorizeResource(Addon::class, 'Addon');
+        
     }
 
     /**
@@ -22,9 +21,8 @@ class BookingAddonController extends Controller
      */
     public function index()
     {
-        Auth::User()
-        ? Response::allow()
-        : Response::deny("You are not a user get lost");
+        if(!Auth::check())
+            return redirect()->intended('login');
 
         $addonsPerPagination = 10;
 
@@ -41,9 +39,8 @@ class BookingAddonController extends Controller
      */
     public function create()
     {
-        Auth::user()
-            ? Response::allow()
-            : Response::deny('You are not a user get lost');
+        if(!Auth::check())
+            return redirect()->intended('login');
 
         return view("addon.create");
     }
@@ -56,9 +53,8 @@ class BookingAddonController extends Controller
      */
     public function store(Request $request)
     {
-        Auth::user()
-            ? Response::allow()
-            : Response::deny('You are not a user get lost');
+        if(!Auth::check())
+            return redirect()->intended('login');
 
         //Validates the input compared to the database values.
         $this->validate($request, [
@@ -101,9 +97,8 @@ class BookingAddonController extends Controller
      */
     public function edit(Addon $addon)
     {
-        Auth::user()
-            ? Response::allow()
-            : Response::deny('You are not a user get lost');
+        if(!Auth::check())
+            return redirect()->intended('login');
 
         return view('addon.edit')->with('addon', $addon);
     }
@@ -117,9 +112,8 @@ class BookingAddonController extends Controller
      */
     public function update(Request $request, Addon $addon)
     {
-        Auth::user()
-            ? Response::allow()
-            : Response::deny('You are not a user get lost');
+        if(!Auth::check())
+            return redirect()->intended('login');
 
         //Validates the input compared to the database values.
         $this->validate($request, [
@@ -145,9 +139,8 @@ class BookingAddonController extends Controller
      */
     public function destroy(Addon $addon)
     {
-        Auth::user()
-            ? Response::allow()
-            : Response::deny('You are not a user get lost');
+        if(!Auth::check())
+            return redirect()->intended('login');
 
         //Deletes a line in the specified point in the table.
         $addon->delete();
