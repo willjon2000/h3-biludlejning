@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vehicle_id')->constrained('bookings_vehicles');
-            $table->foreignId('contact_id')->constrained('bookings_contacts');
+            $table->foreignId('vehicle_id')->constrained('vehicles');
+            $table->foreignId('contact_id')->constrained('contacts');
             $table->timestamp('start_timestamp')->nullable();
             $table->timestamp('end_timestamp')->nullable();
             $table->timestamps();

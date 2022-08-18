@@ -13,10 +13,10 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('bookings_addons_relations', function (Blueprint $table) {
+        Schema::create('addons_relations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('booking_id')->constrained('bookings_vehicles');
-            $table->foreignId('booking_addon_id')->constrained('bookings_addons');
+            $table->foreignId('booking_id')->constrained('bookings');
+            $table->foreignId('addon_id')->constrained('addons');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('bookings_addons_relations');
+        Schema::dropIfExists('addons_relations');
     }
 };
