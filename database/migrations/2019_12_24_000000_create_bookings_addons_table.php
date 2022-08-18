@@ -13,7 +13,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('Bookings_Addons', function (Blueprint $table) {
+        Schema::create('bookings_addons', function (Blueprint $table) {
             $table->id();
             $table->string('type');
             $table->double('price');
@@ -27,6 +27,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('Bookings_addons');
+        Schema::dropIfExists('bookings_addons');
     }
 };
