@@ -137,11 +137,15 @@ class BookingAddonController extends Controller
      * @param  Addon  $addon
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Addon $addon)
+    public function destroy($id)
     {
         if(!Auth::check())
             return redirect()->intended('login');
 
+        $addon = Addon::find($id);
+        if(!$addon)
+            redirect()->route('addon.index');
+        
         //Deletes a line in the specified point in the table.
         $addon->delete();
 
