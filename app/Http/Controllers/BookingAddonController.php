@@ -68,12 +68,8 @@ class BookingAddonController extends Controller
             return redirect()->back()->withInput()->withErrors(['the Addon already exists']);
         }
 
-        //makes the addon
-        $addon = new Addon();
-        $addon->type = $request['type'];
-        $addon->price = $request['price'];
-        $addon->save();
-
+        $input = $request->all();
+        $addon->fill($input)->save();
 
         return redirect()->route('addon.index');
     }
@@ -92,13 +88,17 @@ class BookingAddonController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Addon  $addon
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Addon $addon)
+    public function edit($id)
     {
         if(!Auth::check())
             return redirect()->intended('login');
+        
+        $addon = Addon::find($id);
+        if(!$addon)
+            redirect()->route('addon.index');
 
         return view('addon.edit')->with('addon', $addon);
     }
@@ -107,26 +107,26 @@ class BookingAddonController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  Addon  $addon
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Addon $addon)
+    public function update(Request $request, $id)
     {
         if(!Auth::check())
             return redirect()->intended('login');
+        
+        $addon = Addon::find($id);
+        if(!$addon)
+            redirect()->route('addon.index');
 
         //Validates the input compared to the database values.
-        $this->validate($request, [
-            'type' => "required|String|max:255",
-            'price' => "required|Double|digits_between:1,20"
+        $attr = $this->validate($request, [
+            'type' => "required|string|max:255",
+            'price' => "required|integer|digits_between:1,20"
         ]);
 
-        $oldtype = $addon->type;
-        $oldprice = $addon->price;
-
-        $addon->type = $request['type'];
-        $addon->price = $request['price'];
-        $addon->save();
+        $input = $request->all();
+        $addon->update($input);
 
         return redirect()->route('addon.index');
     }
