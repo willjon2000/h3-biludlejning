@@ -58,8 +58,8 @@ class BookingAddonController extends Controller
 
         //Validates the input compared to the database values.
         $this->validate($request, [
-            'type' => "required|String|max:255",
-            'price' => "required|Double|digits_between:1,20"
+            'type' => "required|string|max:255",
+            'price' => "required|integer|digits_between:1,20"
 
         ]);
 
@@ -69,6 +69,7 @@ class BookingAddonController extends Controller
         }
 
         $input = $request->all();
+        $addon = new Addon();
         $addon->fill($input)->save();
 
         return redirect()->route('addon.index');
@@ -134,7 +135,7 @@ class BookingAddonController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Addon  $addon
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
