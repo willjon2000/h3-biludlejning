@@ -95,7 +95,7 @@ class BookingContactController extends Controller
             redirect()->route('contact.index');
         }
 
-        $attr = $this->validate([
+        $attr = $this->validate( $request,[
             'fullname' => 'required|string|max:255',
             'email' => 'required|String|max:255',
             'phone' => 'required|int|digits:8'

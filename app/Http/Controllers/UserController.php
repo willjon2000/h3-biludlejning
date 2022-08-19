@@ -50,7 +50,7 @@ class UserController extends Controller
         if(!Auth::check())
             return redirect()->intended('login');
 
-        $this->validate([
+        $this->validate($request,[
             'name' => 'required|string|max:255',
             'emial' => 'required|string|max:255',
             'password' => 'required|string|max:255'
@@ -115,7 +115,7 @@ class UserController extends Controller
         if(!$user)
             redirect()->route('user.index');
 
-        $attr = $this->validate([
+        $attr = $this->validate($request,[
             'name' => 'required|string|max:255',
             'emial' => 'required|string|max:255',
             'password' => 'required|string|max:255'
