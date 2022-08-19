@@ -1,74 +1,49 @@
-    <!-- TODO: fix later find a way to place the loginBox in the center of the screen -->
-    <div class="login-wrapper">
-
-        <div class="loginBox">
-            <span class="fs-4 titleText">Log ind</span>
-
-            <!-- Starts the form for login -->
-            <form class="m-0 pb-4" method="post" action="{{ route('authenticate') }}">
-                <!-- Adds the label, depending on the language, and a text input for the user -->
-                <div class="form-group">
-                    <!-- Label for user, depending on the language -->
-                    <label for="user">Email</label>
-                    <!-- The different information for user input -->
-                    <label for="email"></label><input
-                        type="text"
-                        name="email"
-                        id="email"
-                        class="form-control"
-                        style="width: 50%; margin-left:25%"
-                        value="{{old('email')}}"
-                    >
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Log ind</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <style>
+            .container.main {
+                max-width: 35%;
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container main">
+            @if($errors->any())
+            <div class="alert alert-danger" role="alert">
+                {!! implode('', $errors->all(':message')) !!}
+            </div>
+            @endif
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" action="{{ route('authenticate') }}">
+                        <div class="form-group mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Email adresse</label>
+                            <input type="email" name="email" class="form-control" value="{{old('email')}}" placeholder="name@example.com">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Adgangskode</label>
+                            <input type="password" name="password" class="form-control" value="{{old('password')}}" placeholder="•••••••••••••">
+                        </div>
+                        {{ csrf_field() }}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Log ind</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <!-- Label for password, depending on the language -->
-                    <label for="psw">Adgangskode</label>
-                    <!-- The different information for password input -->
-                    <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        class="form-control"
-                        style="width: 50%; margin-left: 25%"
-                        value="{{old('password')}}"
-                    >
-                </div>
-                <!-- Security provided by Laravel -->
-            {{ csrf_field() }}
-            <!-- Submit button for login form, the name depending on the language -->
-                <button type="submit" class="btn btn-primary mt-3">Log ind</button>
-            </form>
+            </div>  
         </div>
-
-    </div>
-
-<style>
-    label {
-        color: white;
-        padding: 1.5em 0 1em 0;
-    }
-
-    .titleText {
-        color: white;
-        line-height: 2.5em;
-    }
-
-    .loginBox {
-        align-items: center;
-        text-align: center;
-        background-color: #606060;
-        width: 50%;
-        display: block;
-        margin: 0 auto;
-    }
-
-    .login-wrapper {
-        width: 100%;
-    }
-
-    @media only screen and (max-width: 700px) {
-        .loginBox {
-            width: 100%;
-        }
-    }
-</style>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    </body>
+</html>
