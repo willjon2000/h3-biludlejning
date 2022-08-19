@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -13,7 +15,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        if(!Auth::check())
+            return redirect()->intended('login');
+
+        $userPerPagination = 10;
+
+        $user = User::paginate($userPerPagination);
+
+        return view('user.index')
+            ->with('user',$user);
     }
 
     /**
@@ -23,7 +33,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        if(!Auth::check())
+            return redirect()->intended('login');
+
+        return view('user.create');
     }
 
     /**
@@ -34,7 +47,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(!Auth::check())
+            return redirect()->intended('login');
+
+        $this->validate([
+            'name' => 'required|string|max:255',
+            'emial' => 'required|string|max:255',
+            'password' => 'required|string|max:255'
+        ]);
+        $search = User::where('email','=',$request->email)->first();
+        if(!empty($search)){
+            return redirect()->back()->withInput()->withErrors(['Your email exists allready login instead']);
+        }
+        $input = $request->all();
+        $user = new User();
+        $user->fill($input)->save();
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -45,7 +74,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        if(!Auth::check())
+            return redirect()->intended('login');
+
+        return view('user.view')->with('user',$id);
     }
 
     /**
@@ -56,7 +88,15 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(!Auth::check())
+            return redirect()->intended('login');
+
+        $user = User::find($id);
+        if(!$user)
+            redirect()->route('user.index');
+
+        return view('user.edit')->with('user',$user);
+
     }
 
     /**
@@ -68,7 +108,23 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(!Auth::check())
+            return redirect()->intended('login');
+
+        $user = User::find($id);
+        if(!$user)
+            redirect()->route('user.index');
+
+        $attr = $this->validate([
+            'name' => 'required|string|max:255',
+            'emial' => 'required|string|max:255',
+            'password' => 'required|string|max:255'
+        ]);
+
+        $input = $request->all();
+        $user->update($input);
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -79,6 +135,16 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(!Auth::check())
+            return redirect()->intended('login');
+
+        $user = User::find($id);
+        if(!$user)
+            redirect()->route('user.index');
+
+        //Deletes a line in the specified point in the table.
+        $user->delete();
+
+        return redirect()->route('user.index');
     }
 }
