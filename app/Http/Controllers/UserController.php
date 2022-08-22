@@ -77,6 +77,10 @@ class UserController extends Controller
         if(!Auth::check())
             return redirect()->intended('login');
 
+        $user = User::find($id);
+        if(!$user)
+            redirect()->route('user.index');
+
         return view('user.view')->with('user',$id);
     }
 
@@ -117,7 +121,7 @@ class UserController extends Controller
 
         $attr = $this->validate($request,[
             'name' => 'required|string|max:255',
-            'emial' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
             'password' => 'required|string|max:255'
         ]);
 
