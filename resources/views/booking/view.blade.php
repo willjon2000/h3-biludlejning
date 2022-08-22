@@ -14,7 +14,33 @@
     </head>
     <body>
         <div class="container main">
-            
+            <b>Start date</b><br>
+            {{$booking['start_timestamp']}}<br>
+            <b>End date</b><br>
+            {{$booking['end_timestamp']}}<br>
+
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Vehicle</th>
+                            <th scope="col">Start</th>
+                            <th scope="col">End</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($booking->contacts as $c)
+                        <tr>
+                            <th scope="row">{{$c->id}}</th>
+                            <td>{{$c['fullname']}}</td>
+                            <td>{{$c['email']}}</td>
+                            <td>{{$c['phone']}}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     </body>

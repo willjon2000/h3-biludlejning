@@ -10,10 +10,78 @@
             .container.main {
                 margin-top: 45px;
             }
+
+            .card {
+                border-bottom: 0;
+            }
+
+            .no-width {
+                width: 1px;
+            }
+
+            td.actions {
+                white-space: nowrap;
+            }
+
+            td.actions > form {
+                display: contents;
+            }
+
+            .text-right {
+                text-align: end;
+            }
+
+            td.actions > form > button {
+                background: transparent;
+                border: unset;
+                color: #0d6efd;
+                text-decoration: underline;
+                padding: unset;
+            }
         </style>
     </head>
     <body>
         <div class="container main">
+            <div class="text-right">
+                <a href="{{ route('booking.create') }}">Opret</a>
+            </div>
+            <div class="card">
+                <div class="card-header">Addons</div>
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Kotant navn</th>
+                                <th scope="col">Kotant email</th>
+                                <th scope="col">Start</th>
+                                <th scope="col">Slut</th>
+                                <th scope="col" class="no-width"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($booking as $b)
+                            <tr>
+                                <th scope="row">{{$b->id}}</th>
+                                <td>{{$b->contact->fullname}}</td>
+                                <td>{{$b->contact->email}}</td>
+                                <td>{{$b['start_timestamp']}}</td>
+                                <td>{{$b['end_timestamp']}}</td>
+                                <td class="actions">
+                                    <a href="{{ route('booking.show', [ 'id' => $a->id ]) }}">Vis</a> | 
+                                    <a href="{{ route('booking.edit', [ 'id' => $a->id ]) }}">Rediger</a> | 
+                                    <form action="{{ route('booking.destroy', $a->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" style="">Slet</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>

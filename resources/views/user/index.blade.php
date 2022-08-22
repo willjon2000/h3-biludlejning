@@ -10,10 +10,74 @@
             .container.main {
                 margin-top: 45px;
             }
+
+            .card {
+                border-bottom: 0;
+            }
+
+            .no-width {
+                width: 1px;
+            }
+
+            td.actions {
+                white-space: nowrap;
+            }
+
+            td.actions > form {
+                display: contents;
+            }
+
+            .text-right {
+                text-align: end;
+            }
+
+            td.actions > form > button {
+                background: transparent;
+                border: unset;
+                color: #0d6efd;
+                text-decoration: underline;
+                padding: unset;
+            }
         </style>
     </head>
     <body>
         <div class="container main">
+            <div class="text-right">
+                <a href="{{ route('user.create') }}">Opret</a>
+            </div>
+            <div class="card">
+                <div class="card-header">Users</div>
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col" class="no-width"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($user as $u)
+                            <tr>
+                                <th scope="row">{{$u->id}}</th>
+                                <td>{{$u['name']}}</td>
+                                <td>{{$u['email']}}</td>
+                                <td class="actions">
+                                    <a href="{{ route('user.show', [ 'id' => $u->id ]) }}">Vis</a> | 
+                                    <a href="{{ route('user.edit', [ 'id' => $u->id ]) }}">Rediger</a> | 
+                                    <form action="{{ route('user.destroy', $u->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" style="">Slet</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>

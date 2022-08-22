@@ -81,7 +81,7 @@ class UserController extends Controller
         if(!$user)
             redirect()->route('user.index');
 
-        return view('user.view')->with('user',$id);
+        return view('user.view')->with('user',$user);
     }
 
     /**

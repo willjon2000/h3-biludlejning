@@ -64,6 +64,7 @@
                                 <td>{{$a['email']}}</td>
                                 <td>{{$a['phone']}}</td>
                                 <td class="actions">
+                                    <a href="{{ route('contact.show', [ 'id' => $a->id ]) }}">Vis</a> | 
                                     <a href="{{ route('contact.edit', [ 'id' => $a->id ]) }}">Rediger</a> | 
                                     <form action="{{ route('contact.destroy', $a->id) }}" method="POST">
                                         @csrf

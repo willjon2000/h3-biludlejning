@@ -60,7 +60,13 @@ class BookingContactController extends Controller
         if(!Auth::check())
             return redirect()->intended('login');
 
-        return view('contact.view')->with('contact',$id);
+        $contact = Contact::find($id);
+        if(!$contact)
+            redirect()->route('contact.index');
+
+        $bookings = $contact->bookings();
+
+        return view('contact.view')->with('contact', $contact);
     }
 
     /**
