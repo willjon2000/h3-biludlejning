@@ -34,12 +34,18 @@ class Addon extends Model
      */
     protected $casts = [
     ];
-    
+
     /**
      * Get the relations for addon.
      */
     public function addonRelations()
     {
         return $this->hasMany(AddonRelation::class);
+    }
+
+    public function bookings()
+    {
+        return $this->belongsToMany(Booking::class,'bookings_addons','addon_id','booking_id','id','id');
+        //return $this->morphedByMany(Booking::class);
     }
 }

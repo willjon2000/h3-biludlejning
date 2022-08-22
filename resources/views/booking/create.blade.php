@@ -43,15 +43,15 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Phone</label>
-                    <input type="text" name="phone" value="{{old('phone')}}" class="form-control">
+                    <input type="number" name="phone" value="{{old('phone')}}" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Start date</label>
-                    <input type="datetime" name="start_timestamp" value="{{old('start_timestamp')}}" class="form-control">
+                    <input type="datetime-local" name="start_timestamp" value="{{old('start_timestamp')}}" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Start date</label>
-                    <input type="datetime" name="start_timestamp" value="{{old('start_timestamp')}}" class="form-control">
+                    <label class="form-label">End date</label>
+                    <input type="datetime-local" name="end_timestamp" value="{{old('start_timestamp')}}" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

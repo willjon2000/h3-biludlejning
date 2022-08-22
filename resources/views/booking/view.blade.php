@@ -14,6 +14,12 @@
     </head>
     <body>
         <div class="container main">
+            <b>Name</b><br>
+            {{$booking->contact->fullname}}<br>
+            <b>Email</b><br>
+            {{$booking->contact->email}}<br>
+            <b>Phone</b><br>
+            {{$booking->contact->phone}}<br>
             <b>Start date</b><br>
             {{$booking['start_timestamp']}}<br>
             <b>End date</b><br>
@@ -24,20 +30,11 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Vehicle</th>
-                            <th scope="col">Start</th>
-                            <th scope="col">End</th>
+                            <th scope="col">Addone type</th>
+                            <th scope="col">Price</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($booking->contacts as $c)
-                        <tr>
-                            <th scope="row">{{$c->id}}</th>
-                            <td>{{$c['fullname']}}</td>
-                            <td>{{$c['email']}}</td>
-                            <td>{{$c['phone']}}</td>
-                        </tr>
-                        @endforeach
                     </tbody>
                 </table>
             </div>
