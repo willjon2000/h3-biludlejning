@@ -14,7 +14,23 @@
     </head>
     <body>
         <div class="container main">
-            
+            <form action="{{ route('contact.update', [ 'id' => $contact->id ]) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="mb-3">
+                    <label class="form-label">fullname</label>
+                    <input type="text" name="fullname" value="{{$contact->fullname}}" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">email</label>
+                    <input type="text" name="email" value="{{$contact->email}}" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">phone</label>
+                    <input type="number" name="phone" value="{{$contact->phone}}" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     </body>

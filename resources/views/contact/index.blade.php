@@ -10,11 +10,72 @@
             .container.main {
                 margin-top: 45px;
             }
+
+            .card {
+                border-bottom: 0;
+            }
+
+            .no-width {
+                width: 1px;
+            }
+
+            td.actions {
+                white-space: nowrap;
+            }
+
+            td.actions > form {
+                display: contents;
+            }
+
+            .text-right {
+                text-align: end;
+            }
+
+            td.actions > form > button {
+                background: transparent;
+                border: unset;
+                color: #0d6efd;
+                text-decoration: underline;
+                padding: unset;
+            }
+        </style>
         </style>
     </head>
     <body>
         <div class="container main">
-            
+            <div class="card">
+                <div class="card-header">Contact</div>
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">fullname</th>
+                                <th scope="col">email</th>
+                                <th scope="col">phone</th>
+                                <th scope="col" class="no-width"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($contact as $a)
+                            <tr>
+                                <th scope="row">{{$a->id}}</th>
+                                <td>{{$a['fullname']}}</td>
+                                <td>{{$a['email']}}</td>
+                                <td>{{$a['phone']}}</td>
+                                <td class="actions">
+                                    <a href="{{ route('contact.edit', [ 'id' => $a->id ]) }}">Rediger</a> | 
+                                    <form action="{{ route('contact.destroy', $a->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">Slet</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     </body>
