@@ -68,9 +68,9 @@
                                 <td>{{$b['start_timestamp']}}</td>
                                 <td>{{$b['end_timestamp']}}</td>
                                 <td class="actions">
-                                    <a href="{{ route('booking.show', [ 'id' => $a->id ]) }}">Vis</a> | 
-                                    <a href="{{ route('booking.edit', [ 'id' => $a->id ]) }}">Rediger</a> | 
-                                    <form action="{{ route('booking.destroy', $a->id) }}" method="POST">
+                                    <a href="{{ route('booking.show', [ 'id' => $b->id ]) }}">Vis</a> |
+                                    <a href="{{ route('booking.edit', [ 'id' => $b->id ]) }}">Rediger</a> |
+                                    <form action="{{ route('booking.destroy', $b->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" style="">Slet</button>
@@ -82,7 +82,7 @@
                     </table>
                 </div>
             </div>
-            
+
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     </body>

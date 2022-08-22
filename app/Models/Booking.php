@@ -34,7 +34,7 @@ class Booking extends Model
      */
     protected $casts = [
     ];
-    
+
     /**
      * Get the contact for the booking.
      */
@@ -42,12 +42,18 @@ class Booking extends Model
     {
         return $this->belongsTo(Contact::class);
     }
-    
+
     /**
      * Get the vehicle for the booking.
      */
     public function vehicle()
     {
         return $this->belongsTo(Vehicle::class);
+    }
+
+    public function addons()
+    {
+        return $this->belongsToMany(Addon::class,'bookings_addons','booking_id','addon_id','id','id');
+        //return $this->morphedByMany(AddonRelation::class, 'addon','addon_relations');
     }
 }

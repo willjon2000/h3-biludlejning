@@ -13,7 +13,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('addons_relations', function (Blueprint $table) {
+        Schema::create('addon_relations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('booking_id')->constrained('bookings');
             $table->foreignId('addon_id')->constrained('addons');

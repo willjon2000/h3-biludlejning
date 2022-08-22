@@ -24,15 +24,15 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="mb-3">
+                <!--<div class="mb-3">
                     <label class="form-label">Addons</label>
                     @foreach ($addon as $a)
-                    <input class="form-check-input" type="checkbox" name="addons[]" value="{{$a->id}}" checked="{{in_array($a->id, $booking->addons)}}">
+                    <input class="form-check-input" type="checkbox" name="addons[]" value="{{$a->id}}" {{$booking->addon == null ? '' : in_array($a->id, $booking->addon) ?? 'checked'}}">
                     <label class="form-check-label">
                         {{$a->type}}
                     </label>
                     @endforeach
-                </div>
+                </div>-->
                 <div class="mb-3">
                     <label class="form-label">Start date</label>
                     <input type="datetime" name="start_timestamp" value="{{$booking->start_timestamp}}" class="form-control">
