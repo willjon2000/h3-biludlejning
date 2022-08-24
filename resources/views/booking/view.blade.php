@@ -20,6 +20,8 @@
             {{$booking->contact->email}}<br>
             <b>Phone</b><br>
             {{$booking->contact->phone}}<br>
+            <b>Vehicle</b><br>
+            {{$booking->vehicle->type}} = {{$booking->vehicle->price}} kr.<br>
             <b>Start date</b><br>
             {{$booking['start_timestamp']}}<br>
             <b>End date</b><br>
@@ -35,6 +37,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach ($booking->addons as $a)
+                        <tr>
+                            <th scope="row">{{$a->id}}</th>
+                            <td>{{$a->type}}</td>
+                            <td>{{$a->price}}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

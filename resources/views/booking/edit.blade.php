@@ -20,7 +20,7 @@
                     <label class="form-label">Car</label>
                     <select name="vehicle_id">
                         @foreach ($vehicle as $v)
-                            <option value="{{$v->id}}" selected="{{$v->id == $booking->vehicle->id}}">{{$v->type}}</option>
+                            <option value="{{$v->id}}" {{$v->id == $booking->vehicle->id ? 'selected' : ''}}>{{$v->type}}</option>
                         @endforeach
                     </select>
                 </div>

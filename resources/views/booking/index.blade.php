@@ -38,6 +38,9 @@
                 text-decoration: underline;
                 padding: unset;
             }
+            .hidden {
+                display: none;
+            }
         </style>
     </head>
     <body>
@@ -46,7 +49,7 @@
                 <a href="{{ route('booking.create') }}">Opret</a>
             </div>
             <div class="card">
-                <div class="card-header">Addons</div>
+                <div class="card-header">Bookings</div>
                 <div class="table-responsive">
                     <table class="table mb-0">
                         <thead>
@@ -82,7 +85,7 @@
                     </table>
                 </div>
             </div>
-
+            {{ $booking->links() }}
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     </body>

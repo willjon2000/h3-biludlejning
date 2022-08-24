@@ -34,7 +34,7 @@
                     <tbody>
                         @foreach ($contact->bookings as $b)
                         <tr>
-                            <th scope="row">{{$b->id}}</th>
+                            <th scope="row"><a href="{{ route('booking.show', [ 'id' => $b->id ]) }}">{{$b->id}}</a></th>
                             <td>{{$b->vehicle->type}}</td>
                             <td>{{$b['start_timestamp']}}</td>
                             <td>{{$b['end_timestamp']}}</td>
